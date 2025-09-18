@@ -1,5 +1,5 @@
 import UIKit
-
+import SDWebImage
 //
 // iTunes Search API
 //
