@@ -93,30 +93,7 @@ final class AppsSearchController: UICollectionViewController {
             withReuseIdentifier: cellIdentifier, for: indexPath
         ) as! SearchResultCell
         
-        let appResult = appResults[indexPath.item]
-        cell.nameLabel.text = appResult.trackName
-        cell.categoryLabel.text = appResult.primaryGenreName
-        cell.ratingsLabel.text = "Rating: \(appResult.averageUserRating ?? 0)"
-        
-        // We can use a library such as SDWebImage
-        
-        let url = URL(string: appResult.artworkUrl100)
-        
-        cell.appIconImageView.sd_setImage(with: url)
-        
-        if appResult.screenshotUrls.count > 0 {
-            cell.screenshot1ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[0]))
-            
-        }
-        
-        if appResult.screenshotUrls.count > 1 {
-            cell.screenshot2ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[1]))
-            
-        }
-        
-        if appResult.screenshotUrls.count > 2 {
-            cell.screenshot3ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[2]))
-        }
+        cell.appResult = appResults[indexPath.item]
         
         // cell.nameLabel.text = "HERE IS MY APP NAME"
         
