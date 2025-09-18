@@ -41,6 +41,16 @@ final class SearchResultCell: UICollectionViewCell {
         return button
     }()
     
+    lazy var screenshot1ImageView = createScreenshotImageView()
+    lazy var screenshot2ImageView = createScreenshotImageView()
+    lazy var screenshot3ImageView = createScreenshotImageView()
+    
+    func createScreenshotImageView() -> UIImageView {
+        let imageView = UIImageView()
+        imageView.backgroundColor = .blue
+        return imageView
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -51,21 +61,23 @@ final class SearchResultCell: UICollectionViewCell {
         ])
         labelsStackView.axis = .vertical
         
-        let stackView = UIStackView(arrangedSubviews: [
+        let infoTopStackView = UIStackView(arrangedSubviews: [
             appIconImageView, labelsStackView, getButton
         ])
-        stackView.spacing = 12
-        stackView.alignment = .center
+        infoTopStackView.spacing = 12
+        infoTopStackView.alignment = .center
         
-        addSubview(stackView)
+        addSubview(infoTopStackView)
         
         // By default all subviews in a UIStackView use constraints regardless of setting of stackView.translatesAutoresizingMaskIntoConstraints
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        /* stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        stackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
+        stackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true */
+        
+        infoTopStackView.fillSuperview(padding: .init(top: 16, left: 16, bottom: 16, right: 16))
     }
     
     required init?(coder: NSCoder) {
