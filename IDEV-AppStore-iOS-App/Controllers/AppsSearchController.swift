@@ -48,6 +48,8 @@ final class AppsSearchController: UICollectionViewController {
     
     fileprivate let searchControler = UISearchController(searchResultsController: nil)
     
+    fileprivate var timer: Timer? // Userd for Search Throttling
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,7 +59,7 @@ final class AppsSearchController: UICollectionViewController {
         
         setupSearchBar()
         
-        fetchiTunesApps()
+        // fetchiTunesApps()
     }
     
     fileprivate func setupSearchBar() {
@@ -71,7 +73,7 @@ final class AppsSearchController: UICollectionViewController {
     fileprivate var appResults: [Result] = []
     
     fileprivate func fetchiTunesApps() {
-        Service.shared.fetchApps() { results, error in
+        Service.shared.fetchApps(searchTerm: "Twitter") { results, error in
             if let error {
                 print("Failed to fetch apps: ", error)
                 return
@@ -125,4 +127,23 @@ extension AppsSearchController: UICollectionViewDelegateFlowLayout {
 
 extension AppsSearchController: UISearchBarDelegate {
     
+    func searchBar(_ searchBar: UISearchBar,
+                   textDidChange searchText: String) {
+        
+        print(searchText)
+        
+        // We have to use Search Throttling - a small delay before making the Network Request
+        
+        timer?.invalidate() // Cancels any previous scheduled execution
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+            Service.shared.fetchApps(searchTerm: searchText) { results, error in
+                self.appResults = results
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+    }
 }
