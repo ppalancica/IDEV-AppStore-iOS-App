@@ -23,6 +23,11 @@ import UIKit
 //
 // https://stackoverflow.com/questions/44177089/itunes-search-api-page-number-for-the-query
 //
+// ----------------
+//
+// https://cocoapods.org/
+// https://github.com/SDWebImage/SDWebImage
+//
 
 final class AppsSearchController: UICollectionViewController {
 
@@ -79,6 +84,11 @@ final class AppsSearchController: UICollectionViewController {
         cell.nameLabel.text = appResult.trackName
         cell.categoryLabel.text = appResult.primaryGenreName
         cell.ratingsLabel.text = "Rating: \(appResult.averageUserRating ?? 0)"
+        
+        // We can use a library such as SDWebImage
+        
+        // cell.appIconImageView.image =
+        // cell.screenshot1ImageView
         
         // cell.nameLabel.text = "HERE IS MY APP NAME"
         
