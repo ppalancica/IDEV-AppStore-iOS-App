@@ -67,7 +67,13 @@ final class SearchResultCell: UICollectionViewCell {
         infoTopStackView.spacing = 12
         infoTopStackView.alignment = .center
         
-        addSubview(infoTopStackView)
+        let overallStackView = UIStackView(arrangedSubviews: [
+            infoTopStackView, screenshot1ImageView
+        ])
+        overallStackView.axis = .vertical
+        overallStackView.spacing = 16
+        
+        addSubview(overallStackView)
         
         // By default all subviews in a UIStackView use constraints regardless of setting of stackView.translatesAutoresizingMaskIntoConstraints
         /* stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -77,7 +83,7 @@ final class SearchResultCell: UICollectionViewCell {
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         stackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true */
         
-        infoTopStackView.fillSuperview(padding: .init(top: 16, left: 16, bottom: 16, right: 16))
+        overallStackView.fillSuperview(padding: .init(top: 16, left: 16, bottom: 16, right: 16))
     }
     
     required init?(coder: NSCoder) {
