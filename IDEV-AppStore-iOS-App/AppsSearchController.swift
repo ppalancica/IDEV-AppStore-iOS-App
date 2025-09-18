@@ -2,14 +2,14 @@ import UIKit
 
 final class AppsSearchController: UICollectionViewController {
 
-    fileprivate let cellIdentifier = "AppsSearchCell"
+    fileprivate let cellIdentifier = "SearchResultCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .white
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellIdentifier)
     }
     
     init() {
@@ -29,8 +29,6 @@ final class AppsSearchController: UICollectionViewController {
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
-        
-        cell.backgroundColor = .red
         
         return cell
     }
