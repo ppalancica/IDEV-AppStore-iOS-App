@@ -1,8 +1,10 @@
 import UIKit
 
-class AppsSearchController: UICollectionViewController {
+final class AppsSearchController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView.backgroundColor = .lightGray
     }
 }
