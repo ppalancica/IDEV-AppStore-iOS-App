@@ -37,10 +37,19 @@ final class AppsSearchController: UICollectionViewController {
             }
             
             if let data {
-                let s = String(data: data, encoding: .utf8)
-                print(s)
+                // let s = String(data: data, encoding: .utf8)
+                // print(s)
+                
+                do {
+                    let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
+                    // print(searchResult)
+                    searchResult.results.forEach {
+                        print($0.trackName, $0.primaryGenreName)
+                    }
+                } catch let jsonError {
+                    print("Failed to decode json: ", jsonError)
+                }
             }
-            
         }.resume()
     }
     
