@@ -5,13 +5,27 @@ final class SearchResultCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .red
+        imageView.layer.cornerRadius = 12
         imageView.widthAnchor.constraint(equalToConstant: 64).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 64).isActive = true
         return imageView
     }()
     
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "APP NAME"
+        return label
+    }()
+    
+    let categoryLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Photos & Videos"
+        return label
+    }()
+    
+    let ratingsLabel: UILabel = {
+        let label = UILabel()
+        label.text = "9.25M"
         return label
     }()
     
@@ -30,10 +44,16 @@ final class SearchResultCell: UICollectionViewCell {
         
         backgroundColor = .yellow
         
+        let labelsStackView = UIStackView(arrangedSubviews: [
+            nameLabel, categoryLabel, ratingsLabel
+        ])
+        labelsStackView.axis = .vertical
+        
         let stackView = UIStackView(arrangedSubviews: [
-            imageView, nameLabel, getButton
+            imageView, labelsStackView, getButton
         ])
         stackView.spacing = 12
+        stackView.alignment = .center
         
         addSubview(stackView)
         
