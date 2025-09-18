@@ -41,7 +41,12 @@ final class AppsSearchController: UICollectionViewController {
     fileprivate var appResults: [Result] = []
     
     fileprivate func fetchiTunesApps() {
-        Service.shared.fetchApps() { results in
+        Service.shared.fetchApps() { results, error in
+            if let error {
+                print("Failed to fetch apps: ", error)
+                return
+            }
+            
             self.appResults = results
             
             DispatchQueue.main.async {
