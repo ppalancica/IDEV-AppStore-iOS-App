@@ -41,37 +41,13 @@ final class AppsSearchController: UICollectionViewController {
     fileprivate var appResults: [Result] = []
     
     fileprivate func fetchiTunesApps() {
-        let urlString = "http://itunes.apple.com/search?term=instagram&entity=software"
-        guard let url = URL(string: urlString) else { return }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error {
-                print("Failed to fetch apps: ", error)
-                return
-            }
+        Service.shared.fetchApps() { results in
+            self.appResults = results
             
-            if let data {
-                // let s = String(data: data, encoding: .utf8)
-                // print(s)
-                
-                do {
-                    let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
-                    self.appResults = searchResult.results
-                    
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                    }
-                    
-                    // print(searchResult)
-                    
-                    // searchResult.results.forEach {
-                    //     print($0.trackName, $0.primaryGenreName)
-                    // }
-                } catch let jsonError {
-                    print("Failed to decode json: ", jsonError)
-                }
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
             }
-        }.resume()
+        }
     }
     
     init() {
