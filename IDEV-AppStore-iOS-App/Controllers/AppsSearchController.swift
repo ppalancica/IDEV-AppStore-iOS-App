@@ -94,7 +94,12 @@ final class AppsSearchController: UICollectionViewController {
             withReuseIdentifier: cellIdentifier, for: indexPath
         ) as! SearchResultCell
         
-        cell.nameLabel.text = "HERE IS MY APP NAME"
+        let appResult = appResults[indexPath.item]
+        cell.nameLabel.text = appResult.trackName
+        cell.categoryLabel.text = appResult.primaryGenreName
+        cell.ratingsLabel.text = "Rating: \(appResult.averageUserRating ?? 0)"
+        
+        // cell.nameLabel.text = "HERE IS MY APP NAME"
         
         return cell
     }
