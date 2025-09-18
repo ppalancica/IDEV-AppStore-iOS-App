@@ -100,8 +100,23 @@ final class AppsSearchController: UICollectionViewController {
         
         // We can use a library such as SDWebImage
         
-        // cell.appIconImageView.image =
-        // cell.screenshot1ImageView
+        let url = URL(string: appResult.artworkUrl100)
+        
+        cell.appIconImageView.sd_setImage(with: url)
+        
+        if appResult.screenshotUrls.count > 0 {
+            cell.screenshot1ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[0]))
+            
+        }
+        
+        if appResult.screenshotUrls.count > 1 {
+            cell.screenshot2ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[1]))
+            
+        }
+        
+        if appResult.screenshotUrls.count > 2 {
+            cell.screenshot3ImageView.sd_setImage(with: URL(string: appResult.screenshotUrls[2]))
+        }
         
         // cell.nameLabel.text = "HERE IS MY APP NAME"
         
