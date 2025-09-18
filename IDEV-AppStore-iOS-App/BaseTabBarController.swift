@@ -5,8 +5,17 @@ final class BaseTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let todayVC = UIViewController()
+        todayVC.view.backgroundColor = .white
+        todayVC.navigationItem.title = "Today"
+        
+        let todayNC = UINavigationController(rootViewController: todayVC)
+        todayNC.tabBarItem.title = "Today"
+        todayNC.tabBarItem.image = UIImage(named: "today_icon")
+        todayNC.navigationBar.prefersLargeTitles = true
+        
         let redVC = UIViewController()
-        // redVC.view.backgroundColor = .red
+        redVC.view.backgroundColor = .white
         redVC.navigationItem.title = "Apps"
         
         let redNC = UINavigationController(rootViewController: redVC)
@@ -15,7 +24,7 @@ final class BaseTabBarController: UITabBarController {
         redNC.navigationBar.prefersLargeTitles = true
         
         let blueVC = UIViewController()
-        // blueVC.view.backgroundColor = .blue
+        blueVC.view.backgroundColor = .white
         blueVC.navigationItem.title = "Search"
         
         let blueNC = UINavigationController(rootViewController: blueVC)
@@ -27,6 +36,7 @@ final class BaseTabBarController: UITabBarController {
         // tabBar.barTintColor = .gray
         
         viewControllers = [
+            todayNC,
             redNC,
             blueNC
         ]
