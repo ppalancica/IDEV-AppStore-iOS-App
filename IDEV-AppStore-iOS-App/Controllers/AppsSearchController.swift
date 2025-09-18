@@ -46,6 +46,8 @@ final class AppsSearchController: UICollectionViewController {
 
     fileprivate let cellIdentifier = "SearchResultCell"
     
+    fileprivate let searchControler = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,7 +55,17 @@ final class AppsSearchController: UICollectionViewController {
         
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
+        setupSearchBar()
+        
         fetchiTunesApps()
+    }
+    
+    fileprivate func setupSearchBar() {
+        definesPresentationContext = true
+        navigationItem.searchController = searchControler
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchControler.obscuresBackgroundDuringPresentation = false
+        searchControler.searchBar.delegate = self
     }
     
     fileprivate var appResults: [Result] = []
@@ -109,4 +121,8 @@ extension AppsSearchController: UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: view.frame.width, height: 300)
     }
+}
+
+extension AppsSearchController: UISearchBarDelegate {
+    
 }
