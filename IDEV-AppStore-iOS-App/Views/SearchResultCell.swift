@@ -56,12 +56,12 @@ final class SearchResultCell: UICollectionViewCell {
         
         // Optional
         
-        let labelsStackView = VerticalStackView(arrangedSubviews: [
-            nameLabel, categoryLabel, ratingsLabel
-        ])
-        
         let infoTopStackView = UIStackView(arrangedSubviews: [
-            appIconImageView, labelsStackView, getButton
+            appIconImageView,
+            VerticalStackView(arrangedSubviews: [
+                nameLabel, categoryLabel, ratingsLabel
+            ]),
+            getButton
         ])
         infoTopStackView.spacing = 12
         infoTopStackView.alignment = .center
