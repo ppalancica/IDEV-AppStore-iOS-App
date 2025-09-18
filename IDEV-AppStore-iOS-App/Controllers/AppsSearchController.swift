@@ -38,6 +38,8 @@ final class AppsSearchController: UICollectionViewController {
         fetchiTunesApps()
     }
     
+    fileprivate var appResults: [Result] = []
+    
     fileprivate func fetchiTunesApps() {
         let urlString = "http://itunes.apple.com/search?term=instagram&entity=software"
         guard let url = URL(string: urlString) else { return }
@@ -54,10 +56,17 @@ final class AppsSearchController: UICollectionViewController {
                 
                 do {
                     let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
-                    // print(searchResult)
-                    searchResult.results.forEach {
-                        print($0.trackName, $0.primaryGenreName)
+                    self.appResults = searchResult.results
+                    
+                    DispatchQueue.main.async {
+                        self.collectionView.reloadData()
                     }
+                    
+                    // print(searchResult)
+                    
+                    // searchResult.results.forEach {
+                    //     print($0.trackName, $0.primaryGenreName)
+                    // }
                 } catch let jsonError {
                     print("Failed to decode json: ", jsonError)
                 }
@@ -75,7 +84,7 @@ final class AppsSearchController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return appResults.count
     }
     
     override func collectionView(_ collectionView: UICollectionView,
