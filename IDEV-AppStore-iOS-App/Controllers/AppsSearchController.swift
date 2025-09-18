@@ -28,6 +28,10 @@ import SDWebImage
 // https://cocoapods.org/
 // https://github.com/SDWebImage/SDWebImage
 //
+// ENABLE_USER_SCRIPT_SANDBOXING must be NO
+//
+// https://stackoverflow.com/questions/76590131/error-while-build-ios-app-in-xcode-sandbox-rsync-samba-13105-deny1-file-w
+//
 
 final class AppsSearchController: UICollectionViewController {
 
