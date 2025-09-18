@@ -34,8 +34,10 @@ final class SearchResultCell: UICollectionViewCell {
         button.setTitle("GET", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 14)
-        button.backgroundColor = .darkGray
+        button.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
+        button.layer.cornerRadius = 16
         button.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 32).isActive = true
         return button
     }()
     
@@ -61,9 +63,9 @@ final class SearchResultCell: UICollectionViewCell {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
         stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        stackView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        stackView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
     }
     
     required init?(coder: NSCoder) {
