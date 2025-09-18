@@ -54,8 +54,6 @@ final class SearchResultCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .yellow
-        
         let labelsStackView = UIStackView(arrangedSubviews: [
             nameLabel, categoryLabel, ratingsLabel
         ])
@@ -67,13 +65,19 @@ final class SearchResultCell: UICollectionViewCell {
         infoTopStackView.spacing = 12
         infoTopStackView.alignment = .center
         
+        let screeenshotsStackView = UIStackView(arrangedSubviews: [
+            screenshot1ImageView, screenshot2ImageView, screenshot3ImageView
+        ])
+        screeenshotsStackView.spacing = 12
+        screeenshotsStackView.distribution = .fillEqually
+        
         let overallStackView = UIStackView(arrangedSubviews: [
-            infoTopStackView, screenshot1ImageView
+            infoTopStackView, screeenshotsStackView
         ])
         overallStackView.axis = .vertical
         overallStackView.spacing = 16
         
-        addSubview(overallStackView)
+        contentView.addSubview(overallStackView)
         
         // By default all subviews in a UIStackView use constraints regardless of setting of stackView.translatesAutoresizingMaskIntoConstraints
         /* stackView.translatesAutoresizingMaskIntoConstraints = false
