@@ -1,5 +1,8 @@
 import UIKit
 
+//
+// iTunes Search API
+//
 // https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/
 //
 // https://performance-partners.apple.com/search-api
@@ -11,6 +14,15 @@ import UIKit
 //
 // https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/Searching.html
 // https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/LookupExamples.html
+//
+// https://performance-partners.apple.com/program-overview
+//
+// https://publicapi.dev/i-tunes-api
+//
+// https://jsonformatter.org/json-pretty-print
+//
+// https://stackoverflow.com/questions/44177089/itunes-search-api-page-number-for-the-query
+//
 
 final class AppsSearchController: UICollectionViewController {
 
