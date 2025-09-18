@@ -28,6 +28,15 @@ import SDWebImage
 // https://cocoapods.org/
 // https://github.com/SDWebImage/SDWebImage
 //
+// sudo gem install cocoapods
+// pod init
+// vi Podfile
+// open Podfile
+// Add pod 'SDWebImage'
+// pod install
+//
+// Close Xcode and open .xcworkspace from now on
+//
 // ENABLE_USER_SCRIPT_SANDBOXING must be NO
 //
 // https://stackoverflow.com/questions/76590131/error-while-build-ios-app-in-xcode-sandbox-rsync-samba-13105-deny1-file-w
