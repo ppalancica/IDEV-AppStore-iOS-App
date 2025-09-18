@@ -50,12 +50,22 @@ final class AppsSearchController: UICollectionViewController {
     
     fileprivate var timer: Timer? // Userd for Search Throttling
     
+    fileprivate let enterSearchTermLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Please enter search term above..."
+        label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: 20)
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .white
-        
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        
+        collectionView.addSubview(enterSearchTermLabel)
+        enterSearchTermLabel.fillSuperview(padding: .init(top: 100, left: 50, bottom: 0, right: 50))
         
         setupSearchBar()
         
@@ -97,6 +107,9 @@ final class AppsSearchController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
+        
+        enterSearchTermLabel.isHidden = appResults.count != 0
+        
         return appResults.count
     }
     
