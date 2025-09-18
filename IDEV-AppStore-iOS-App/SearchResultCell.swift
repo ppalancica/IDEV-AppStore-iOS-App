@@ -5,6 +5,7 @@ final class SearchResultCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .red
+        imageView.widthAnchor.constraint(equalToConstant: 64).isActive = true
         return imageView
     }()
     
@@ -19,13 +20,15 @@ final class SearchResultCell: UICollectionViewCell {
         button.setTitle("GET", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 14)
+        button.backgroundColor = .darkGray
+        button.widthAnchor.constraint(equalToConstant: 80).isActive = true
         return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .green
+        backgroundColor = .yellow
         
         let stackView = UIStackView(arrangedSubviews: [
             imageView, nameLabel, getButton
@@ -34,6 +37,7 @@ final class SearchResultCell: UICollectionViewCell {
         
         addSubview(stackView)
         
+        // By default all subviews in a UIStackView use constraints regardless of setting of stackView.translatesAutoresizingMaskIntoConstraints
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
