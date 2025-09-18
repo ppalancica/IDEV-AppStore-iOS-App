@@ -2,7 +2,7 @@ import UIKit
 
 final class SearchResultCell: UICollectionViewCell {
     
-    let imageView: UIImageView = {
+    let appIconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .red
         imageView.layer.cornerRadius = 12
@@ -50,7 +50,7 @@ final class SearchResultCell: UICollectionViewCell {
         labelsStackView.axis = .vertical
         
         let stackView = UIStackView(arrangedSubviews: [
-            imageView, labelsStackView, getButton
+            appIconImageView, labelsStackView, getButton
         ])
         stackView.spacing = 12
         stackView.alignment = .center
