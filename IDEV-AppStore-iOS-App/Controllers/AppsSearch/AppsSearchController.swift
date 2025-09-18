@@ -42,7 +42,7 @@ import SDWebImage
 // https://stackoverflow.com/questions/76590131/error-while-build-ios-app-in-xcode-sandbox-rsync-samba-13105-deny1-file-w
 //
 
-final class AppsSearchController: UICollectionViewController {
+final class AppsSearchController: BaseListController {
 
     fileprivate let cellIdentifier = "SearchResultCell"
     
@@ -95,14 +95,6 @@ final class AppsSearchController: UICollectionViewController {
                 self.collectionView.reloadData()
             }
         }
-    }
-    
-    init() {
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     override func collectionView(_ collectionView: UICollectionView,
