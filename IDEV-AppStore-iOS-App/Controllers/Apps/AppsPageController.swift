@@ -1,6 +1,6 @@
 import UIKit
 
-final class AppsController: BaseListController {
+final class AppsPageController: BaseListController {
     
     fileprivate let cellIdentifier = "AppsGroupCell"
     
@@ -25,7 +25,7 @@ final class AppsController: BaseListController {
     }
 }
 
-extension AppsController: UICollectionViewDelegateFlowLayout {
+extension AppsPageController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,

@@ -10,7 +10,7 @@ final class BaseTabBarController: UITabBarController {
         
         viewControllers = [
             createNavigationController(viewController: UIViewController(), title: "Today", imageName: "today_icon"),
-            createNavigationController(viewController: AppsController(), title: "Apps", imageName: "apps"),
+            createNavigationController(viewController: AppsPageController(), title: "Apps", imageName: "apps"),
             createNavigationController(viewController: AppsSearchController(), title: "Search", imageName: "search")
         ]
     }
