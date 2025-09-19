@@ -64,13 +64,19 @@ final class AppsPageController: BaseListController {
     
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier:
+                cellIdentifier, for: indexPath
+        ) as! AppsGroupCell
+        
+        cell.titleLabel.text = "WHATEVER YOU WANT"
+        //cell.horizontalController =
         
         return cell
     }
