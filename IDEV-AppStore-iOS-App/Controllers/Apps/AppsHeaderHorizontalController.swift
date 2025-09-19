@@ -24,7 +24,10 @@ final class AppsHeaderHorizontalController: BaseListController {
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: cellIdentifier,
+            for: indexPath
+        ) as! AppsHeaderCell
         
         return cell
     }

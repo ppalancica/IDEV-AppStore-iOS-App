@@ -17,6 +17,8 @@ final class AppsPageController: BaseListController {
     fileprivate let cellIdentifier = "AppsGroupCell"
     fileprivate let headerIdentifier = "AppsGroupHeader"
     
+    fileprivate var topFreeApps: AppGroup?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,12 +37,19 @@ final class AppsPageController: BaseListController {
     fileprivate func fetchData() {
         Service.shared.fetchTopFreeApps { appGroup, error in
             if let error {
-                print("Failed to fetch Top Free Apps")
+                print("Failed to fetch Top Free Apps: ", error)
                 return
             }
             
             if let appGroup {
-                print(appGroup.feed.results)
+                self.topFreeApps = appGroup
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+                
+                // print(appGroup.feed.results)
+                // print(appGroup.feed.title)
             }
         }
     }
@@ -64,6 +73,7 @@ final class AppsPageController: BaseListController {
     
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
+        
         return 1
     }
     
@@ -75,8 +85,8 @@ final class AppsPageController: BaseListController {
                 cellIdentifier, for: indexPath
         ) as! AppsGroupCell
         
-        cell.titleLabel.text = "WHATEVER YOU WANT"
-        //cell.horizontalController =
+        cell.titleLabel.text = topFreeApps?.feed.title
+        cell.horizontalController.appGroup = topFreeApps
         
         return cell
     }
