@@ -22,6 +22,14 @@ final class AppsPageController: BaseListController {
     fileprivate var socialApps: [SocialApp] = []
     fileprivate var groups: [AppGroup] = []
     
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let activityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
+        activityIndicatorView.color = .black
+        activityIndicatorView.startAnimating()
+        activityIndicatorView.hidesWhenStopped = true
+        return activityIndicatorView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +41,9 @@ final class AppsPageController: BaseListController {
         collectionView.register(AppsPageHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: headerIdentifier)
+        
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.fillSuperview()
         
         fetchData()
     }
@@ -103,6 +114,8 @@ final class AppsPageController: BaseListController {
         dispatchGroup.notify(queue: .main) {
             print("All task completed")
             
+            self.activityIndicatorView.stopAnimating()
+            
             if let group1 {
                 self.groups.append(group1)
             }
@@ -111,9 +124,7 @@ final class AppsPageController: BaseListController {
                 self.groups.append(group2)
             }
             
-            
-            // We are on Main Queue here, so no need to explicitly dispacth
-            self.collectionView.reloadData()
+            self.collectionView.reloadData() // We are on Main Queue here, so no need to explicitly dispatch to Main Queue
         }
     }
     
