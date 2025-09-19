@@ -2,7 +2,7 @@ import UIKit
 
 final class AppsHorizontalController: BaseListController {
 
-    fileprivate let cellIdentifier = "Cell"
+    fileprivate let cellIdentifier = "AppRowCell"
     
     fileprivate let topBottomPadding: CGFloat = 12
     fileprivate let lineSpacing: CGFloat = 10
