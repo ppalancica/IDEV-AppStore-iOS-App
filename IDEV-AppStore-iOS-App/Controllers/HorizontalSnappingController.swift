@@ -3,7 +3,7 @@ import UIKit
 class HorizontalSnappingController: UICollectionViewController {
 
     init() {
-        let layout = SnappingLayout()
+        let layout = BetterSnappingLayout() // SnappingLayout()
         layout.scrollDirection = .horizontal
         
         super.init(collectionViewLayout: layout)

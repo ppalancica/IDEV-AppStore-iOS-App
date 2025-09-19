@@ -19,6 +19,8 @@ final class AppsHorizontalController: HorizontalSnappingController {
         collectionView.backgroundColor = .white
         collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        
         // if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
         //     layout.scrollDirection = .horizontal
         // }
@@ -70,6 +72,7 @@ extension AppsHorizontalController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsets(top: topBottomPadding, left: 16, bottom: topBottomPadding, right: 16)
+        // left and right were 16 each before adding BetterSnappingLayout
+        return UIEdgeInsets(top: topBottomPadding, left: 0, bottom: topBottomPadding, right: 0)
     }
 }
