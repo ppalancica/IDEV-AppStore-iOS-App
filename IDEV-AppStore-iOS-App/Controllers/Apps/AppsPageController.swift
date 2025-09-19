@@ -87,7 +87,10 @@ final class AppsPageController: BaseListController {
             }
         }
         
+        dispatchGroup.enter()
         Service.shared.fetchSocialApps { socialApps, error in
+            dispatchGroup.leave()
+            
             if let error {
                 print("Failed to fetch Social Apps: ", error)
             } else if let socialApps {
