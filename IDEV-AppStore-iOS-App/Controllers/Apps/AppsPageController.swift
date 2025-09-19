@@ -12,6 +12,9 @@ import UIKit
 //
 // https://rss.app/en/
 //
+// All info about App with ID 6448311069 (ChatGPT): https://itunes.apple.com/lookup?id=6448311069
+//
+
 final class AppsPageController: BaseListController {
     
     fileprivate let cellIdentifier = "AppsGroupCell"
@@ -170,6 +173,7 @@ final class AppsPageController: BaseListController {
         
         cell.horizontalController.didSelectHandler = { [weak self] feedResult in
             let appDetailVC = AppDetailController()
+            appDetailVC.appId = feedResult.id
             appDetailVC.navigationItem.title = feedResult.name
             self?.navigationController?.pushViewController(appDetailVC, animated: true)
         }
