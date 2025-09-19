@@ -19,6 +19,7 @@ final class AppsPageController: BaseListController {
     
     fileprivate var topFreeApps: AppGroup?
     
+    fileprivate var socialApps: [SocialApp] = []
     fileprivate var groups: [AppGroup] = []
     
     override func viewDidLoad() {
@@ -69,7 +70,7 @@ final class AppsPageController: BaseListController {
             dispatchGroup.leave()
             
             if let error {
-                print("Failed to fetch Top Free Apps: ", error)
+                print("Failed to fetch Top Paid Apps: ", error)
             } else if let appGroup {
                 // Not used anymore
                 // self.topFreeApps = appGroup
@@ -83,6 +84,16 @@ final class AppsPageController: BaseListController {
                 
                 // print(appGroup.feed.results)
                 // print(appGroup.feed.title)
+            }
+        }
+        
+        Service.shared.fetchSocialApps { socialApps, error in
+            if let error {
+                print("Failed to fetch Social Apps: ", error)
+            } else if let socialApps {
+                self.socialApps = socialApps
+                
+                // socialApps.forEach { print($0.name) }
             }
         }
         
@@ -107,9 +118,14 @@ final class AppsPageController: BaseListController {
                                  viewForSupplementaryElementOfKind kind: String,
                                  at indexPath: IndexPath) -> UICollectionReusableView {
         
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                     withReuseIdentifier: headerIdentifier,
-                                                                     for: indexPath)
+        let header = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: headerIdentifier,
+            for: indexPath
+        ) as! AppsPageHeader
+        
+        header.appsHeaderHorizontalController.socialApps = socialApps
+        
         return header
     }
     
@@ -117,7 +133,7 @@ final class AppsPageController: BaseListController {
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: 0) // 300
+        return CGSize(width: view.frame.width, height: 300)
     }
     
     override func collectionView(_ collectionView: UICollectionView,

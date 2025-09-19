@@ -4,6 +4,12 @@ final class AppsHeaderHorizontalController: BaseListController {
     
     fileprivate let cellIdentifier = "AppsHeaderCell"
     
+    var socialApps: [SocialApp] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,7 +24,7 @@ final class AppsHeaderHorizontalController: BaseListController {
     
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return socialApps.count
     }
     
     override func collectionView(_ collectionView: UICollectionView,
@@ -28,6 +34,10 @@ final class AppsHeaderHorizontalController: BaseListController {
             withReuseIdentifier: cellIdentifier,
             for: indexPath
         ) as! AppsHeaderCell
+        
+        cell.companyLabel.text = "COMPANY NAME"
+        // cell.titleLabel
+        // cell.imageView = 
         
         return cell
     }
