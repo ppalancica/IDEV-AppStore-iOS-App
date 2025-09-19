@@ -7,6 +7,8 @@ final class AppsHorizontalController: HorizontalSnappingController {
     fileprivate let topBottomPadding: CGFloat = 12
     fileprivate let lineSpacing: CGFloat = 10
     
+    var didSelectHandler: ((FeedResult) -> Void)?
+    
     var appGroup: AppGroup? {
         didSet {
             collectionView.reloadData()
@@ -48,6 +50,17 @@ final class AppsHorizontalController: HorizontalSnappingController {
         cell.imageView.sd_setImage(with: URL(string: app?.artworkUrl100 ?? ""))
         
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView,
+                                 didSelectItemAt indexPath: IndexPath) {
+        
+        // collectionView.deselectItem(at: indexPath, animated: true)
+        
+        if let app = appGroup?.feed.results[indexPath.item] {
+            didSelectHandler?(app)
+            print(app.name)
+        }
     }
 }
 

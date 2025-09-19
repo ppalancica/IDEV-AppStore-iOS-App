@@ -168,6 +168,12 @@ final class AppsPageController: BaseListController {
         cell.titleLabel.text = appGroup.feed.title
         cell.horizontalController.appGroup = appGroup
         
+        cell.horizontalController.didSelectHandler = { [weak self] feedResult in
+            let appDetailVC = AppDetailController()
+            appDetailVC.navigationItem.title = feedResult.name
+            self?.navigationController?.pushViewController(appDetailVC, animated: true)
+        }
+        
         // cell.titleLabel.text = topFreeApps?.feed.title
         // cell.horizontalController.appGroup = topFreeApps
         
