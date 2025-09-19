@@ -1,6 +1,6 @@
 import UIKit
 
-final class AppsHorizontalController: BaseListController {
+final class AppsHorizontalController: HorizontalSnappingController {
 
     fileprivate let cellIdentifier = "AppRowCell"
     
@@ -19,9 +19,11 @@ final class AppsHorizontalController: BaseListController {
         collectionView.backgroundColor = .white
         collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
+        // if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+        //     layout.scrollDirection = .horizontal
+        // }
+        
+        // collectionView.isPagingEnabled = true // Doesn't work properly
     }
     
     override func collectionView(_ collectionView: UICollectionView,

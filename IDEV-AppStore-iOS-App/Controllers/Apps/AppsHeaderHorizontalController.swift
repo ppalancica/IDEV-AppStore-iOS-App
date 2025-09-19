@@ -1,6 +1,6 @@
 import UIKit
 
-final class AppsHeaderHorizontalController: BaseListController {
+final class AppsHeaderHorizontalController: HorizontalSnappingController { // BaseListController
     
     fileprivate let cellIdentifier = "AppsHeaderCell"
     
@@ -17,9 +17,9 @@ final class AppsHeaderHorizontalController: BaseListController {
         
         collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
+        // if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+        //     layout.scrollDirection = .horizontal
+        // }
     }
     
     override func collectionView(_ collectionView: UICollectionView,
