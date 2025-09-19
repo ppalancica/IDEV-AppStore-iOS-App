@@ -19,8 +19,10 @@ final class AppsPageController: BaseListController {
     
     fileprivate var topFreeApps: AppGroup?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    fileprivate var groups: [AppGroup] = []
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         collectionView.backgroundColor = .white
         
@@ -42,8 +44,32 @@ final class AppsPageController: BaseListController {
             }
             
             if let appGroup {
-                self.topFreeApps = appGroup
+                // Not used anymore
+                // self.topFreeApps = appGroup
                 
+                self.groups.append(appGroup)
+ 
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+                
+                // print(appGroup.feed.results)
+                // print(appGroup.feed.title)
+            }
+        }
+        
+        Service.shared.fetchTopPaidApps { appGroup, error in
+            if let error {
+                print("Failed to fetch Top Free Apps: ", error)
+                return
+            }
+            
+            if let appGroup {
+                // Not used anymore
+                // self.topFreeApps = appGroup
+                
+                self.groups.append(appGroup)
+ 
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -68,13 +94,12 @@ final class AppsPageController: BaseListController {
                         layout collectionViewLayout: UICollectionViewLayout,
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: 300)
+        return CGSize(width: view.frame.width, height: 0) // 300
     }
     
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        
-        return 1
+        return groups.count
     }
     
     override func collectionView(_ collectionView: UICollectionView,
@@ -85,8 +110,13 @@ final class AppsPageController: BaseListController {
                 cellIdentifier, for: indexPath
         ) as! AppsGroupCell
         
-        cell.titleLabel.text = topFreeApps?.feed.title
-        cell.horizontalController.appGroup = topFreeApps
+        let appGroup = groups[indexPath.item]
+        
+        cell.titleLabel.text = appGroup.feed.title
+        cell.horizontalController.appGroup = appGroup
+        
+        // cell.titleLabel.text = topFreeApps?.feed.title
+        // cell.horizontalController.appGroup = topFreeApps
         
         return cell
     }
