@@ -2,14 +2,14 @@ import UIKit
 
 final class AppsHeaderHorizontalController: BaseListController {
     
-    fileprivate let cellIdentifier = "Cell"
+    fileprivate let cellIdentifier = "AppsHeaderCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .yellow
+        collectionView.backgroundColor = .white
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.register(AppsHeaderCell.self, forCellWithReuseIdentifier: cellIdentifier)
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
@@ -26,8 +26,6 @@ final class AppsHeaderHorizontalController: BaseListController {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
         
-        cell.backgroundColor = .red
-        
         return cell
     }
 }
@@ -38,6 +36,13 @@ extension AppsHeaderHorizontalController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: view.frame.height)
+        return CGSize(width: view.frame.width - 48, height: view.frame.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
 }
