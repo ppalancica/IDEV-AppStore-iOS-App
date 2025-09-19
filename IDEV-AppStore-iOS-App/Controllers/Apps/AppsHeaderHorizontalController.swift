@@ -35,9 +35,11 @@ final class AppsHeaderHorizontalController: BaseListController {
             for: indexPath
         ) as! AppsHeaderCell
         
-        cell.companyLabel.text = "COMPANY NAME"
-        // cell.titleLabel
-        // cell.imageView = 
+        let app = socialApps[indexPath.item]
+        
+        cell.companyLabel.text = app.name
+        cell.titleLabel.text = app.tagline
+        cell.imageView.sd_setImage(with: URL(string: app.imageUrl))
         
         return cell
     }
