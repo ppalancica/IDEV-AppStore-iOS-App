@@ -21,8 +21,8 @@ final class AppsPageController: BaseListController {
     
     fileprivate var groups: [AppGroup] = []
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         collectionView.backgroundColor = .white
         
@@ -37,46 +37,69 @@ final class AppsPageController: BaseListController {
     }
     
     fileprivate func fetchData() {
+        var group1: AppGroup?
+        var group2: AppGroup?
+        
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
         Service.shared.fetchTopFreeApps { appGroup, error in
+            dispatchGroup.leave()
+            
             if let error {
                 print("Failed to fetch Top Free Apps: ", error)
-                return
-            }
-            
-            if let appGroup {
+            } else if let appGroup {
                 // Not used anymore
                 // self.topFreeApps = appGroup
                 
-                self.groups.append(appGroup)
+                // self.groups.append(appGroup)
+                group1 = appGroup
  
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
+                // DispatchQueue.main.async {
+                //     self.collectionView.reloadData()
+                // }
                 
                 // print(appGroup.feed.results)
                 // print(appGroup.feed.title)
             }
         }
         
+        dispatchGroup.enter()
         Service.shared.fetchTopPaidApps { appGroup, error in
+            dispatchGroup.leave()
+            
             if let error {
                 print("Failed to fetch Top Free Apps: ", error)
-                return
-            }
-            
-            if let appGroup {
+            } else if let appGroup {
                 // Not used anymore
                 // self.topFreeApps = appGroup
                 
-                self.groups.append(appGroup)
+//                self.groups.append(appGroup)
+                group2 = appGroup
  
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
+                // DispatchQueue.main.async {
+                //     self.collectionView.reloadData()
+                // }
                 
                 // print(appGroup.feed.results)
                 // print(appGroup.feed.title)
             }
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            print("All task completed")
+            
+            if let group1 {
+                self.groups.append(group1)
+            }
+            
+            if let group2 {
+                self.groups.append(group2)
+            }
+            
+            
+            // We are on Main Queue here, so no need to explicitly dispacth
+            self.collectionView.reloadData()
         }
     }
     
