@@ -36,4 +36,36 @@ final class Service {
             }
         }.resume()
     }
+    
+    func fetchTopFreeApps(completion: @escaping (AppGroup?, Error?) -> Void) {
+        // https://apps.apple.com/us/story/id1551161750
+        // https://rss.itunes.apple.com/api/v1/us/ios-apps/top-paid/games/25/explicit.json
+        let urlString = "https://rss.marketingtools.apple.com/api/v2/us/apps/top-free/25/apps.json"
+        let url = URL(string: urlString)!
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error {
+                print("Failed to fetch games: ", error)
+                completion(nil, error)
+                return
+            }
+            
+            if let data {
+                do {
+                    let appGroup = try JSONDecoder().decode(AppGroup.self, from: data)
+                    completion(appGroup, nil)
+                    
+                    // print(appGroup.feed.results)
+                    
+                    // appGroup.feed.results.forEach {
+                    //    print($0.name)
+                    // }
+                } catch let jsonError {
+                    print("Failed to decode json: ", jsonError)
+                    completion(nil, error)
+                }
+            }
+            
+        }.resume()
+    }
 }

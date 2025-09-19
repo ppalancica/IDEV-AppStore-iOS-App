@@ -1,5 +1,17 @@
 import UIKit
 
+//
+// RSS Feed Generator
+//
+// https://rss.marketingtools.apple.com/
+//
+// https://rss.marketingtools.apple.com/api/v2/us/apps/top-free/25/apps.json
+//
+// Not working anymore: http://rss.itunes.apple.com/api/v1/us/apple-music/coming-soon/all/10/explicit.json
+// https://itunes.apple.com/lookup?id=%@
+//
+// https://rss.app/en/
+//
 final class AppsPageController: BaseListController {
     
     fileprivate let cellIdentifier = "AppsGroupCell"
@@ -16,6 +28,21 @@ final class AppsPageController: BaseListController {
         collectionView.register(AppsPageHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: headerIdentifier)
+        
+        fetchData()
+    }
+    
+    fileprivate func fetchData() {
+        Service.shared.fetchTopFreeApps { appGroup, error in
+            if let error {
+                print("Failed to fetch Top Free Apps")
+                return
+            }
+            
+            if let appGroup {
+                print(appGroup.feed.results)
+            }
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView,
