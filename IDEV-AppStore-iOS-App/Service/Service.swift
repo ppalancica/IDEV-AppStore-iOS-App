@@ -41,6 +41,7 @@ final class Service {
         // https://apps.apple.com/us/story/id1551161750
         // https://rss.itunes.apple.com/api/v1/us/ios-apps/top-paid/games/25/explicit.json
         let urlString = "https://rss.marketingtools.apple.com/api/v2/us/apps/top-free/25/apps.json"
+        // To get Top Paid Apps use: "https://rss.marketingtools.apple.com/api/v2/us/apps/top-paid/25/apps.json"
         let url = URL(string: urlString)!
         
         URLSession.shared.dataTask(with: url) { data, response, error in
