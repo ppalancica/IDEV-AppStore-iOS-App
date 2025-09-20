@@ -2,7 +2,8 @@ import UIKit
 
 final class AppDetailController: BaseListController {
     
-    fileprivate let cellIdentifier = "AppDetailCell"
+    fileprivate let appDetailCellID = "AppDetailCell"
+    fileprivate let appPreviewCellID = "AppPreviewCellID"
     
     var appId: String! {
         didSet {
@@ -31,25 +32,37 @@ final class AppDetailController: BaseListController {
         
         collectionView.backgroundColor = .white
         
-        collectionView.register(AppDetailCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.register(AppDetailCell.self, forCellWithReuseIdentifier: appDetailCellID)
+        collectionView.register(AppPreviewCell.self, forCellWithReuseIdentifier: appPreviewCellID)
     }
     
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: cellIdentifier,
-            for: indexPath
-        ) as! AppDetailCell
-        
-        cell.app = app
-        
-        return cell
+        if indexPath.item == 0 {
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: appDetailCellID,
+                for: indexPath
+            ) as! AppDetailCell
+            
+            cell.app = app
+            
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: appPreviewCellID,
+                for: indexPath
+            ) as! AppPreviewCell
+            
+            // cell.app = app
+            
+            return cell
+        }
     }
 }
 
@@ -60,14 +73,20 @@ extension AppDetailController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         // Calculate the size the cell needs based on the content
-        let dummyCell = AppDetailCell(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1000))
         
-        dummyCell.app = app
-        dummyCell.layoutIfNeeded()
-        
-        let estimatedSize = dummyCell.systemLayoutSizeFitting(CGSize(width: view.frame.width, height: 1000))
-        
-        return CGSize(width: view.frame.width, height: estimatedSize.height)
-        // return CGSize(width: view.frame.width, height: 600)
+        if indexPath.item == 0 {
+            let dummyCell = AppDetailCell(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1000))
+            
+            dummyCell.app = app
+            dummyCell.layoutIfNeeded()
+            
+            let estimatedSize = dummyCell.systemLayoutSizeFitting(CGSize(width: view.frame.width, height: 1000))
+            
+            return CGSize(width: view.frame.width, height: estimatedSize.height)
+            // return CGSize(width: view.frame.width, height: 600)
+        } else {
+            return CGSize(width: view.frame.width, height: 500)
+            
+        }
     }
 }
