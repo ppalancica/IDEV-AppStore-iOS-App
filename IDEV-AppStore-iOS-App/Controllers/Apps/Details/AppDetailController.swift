@@ -64,6 +64,21 @@ extension AppDetailController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: 600)
+        // Calculate the size the cell needs based on the content
+        let dummyCell = AppDetailCell(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1000))
+        
+        if let app {
+            dummyCell.nameLabel.text = app.trackName
+            dummyCell.releaseNotesLabel.text = app.releaseNotes
+            dummyCell.appIconImageView.sd_setImage(with: URL(string: app.artworkUrl100))
+            dummyCell.priceButton.setTitle(app.formattedPrice, for: .normal)
+        }
+        
+        dummyCell.layoutIfNeeded()
+        
+        let estimatedSize = dummyCell.systemLayoutSizeFitting(CGSize(width: view.frame.width, height: 1000))
+        
+        return CGSize(width: view.frame.width, height: estimatedSize.height)
+        // return CGSize(width: view.frame.width, height: 600)
     }
 }
