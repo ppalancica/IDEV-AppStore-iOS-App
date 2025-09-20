@@ -13,10 +13,10 @@ final class AppDetailCell: UICollectionViewCell {
     
     var app: Result! {
         didSet {
-            nameLabel.text = app.trackName
-            releaseNotesLabel.text = app.releaseNotes
-            appIconImageView.sd_setImage(with: URL(string: app.artworkUrl100))
-            priceButton.setTitle(app.formattedPrice, for: .normal)
+            nameLabel.text = app?.trackName
+            releaseNotesLabel.text = app?.releaseNotes
+            appIconImageView.sd_setImage(with: URL(string: app?.artworkUrl100 ?? ""))
+            priceButton.setTitle(app?.formattedPrice, for: .normal)
         }
     }
     
