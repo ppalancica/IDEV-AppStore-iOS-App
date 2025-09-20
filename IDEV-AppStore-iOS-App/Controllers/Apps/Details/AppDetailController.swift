@@ -59,7 +59,7 @@ final class AppDetailController: BaseListController {
                 for: indexPath
             ) as! AppPreviewCell
             
-            // cell.app = app
+            cell.horizontalController.app = app
             
             return cell
         }
@@ -73,7 +73,6 @@ extension AppDetailController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         // Calculate the size the cell needs based on the content
-        
         if indexPath.item == 0 {
             let dummyCell = AppDetailCell(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1000))
             
@@ -86,7 +85,6 @@ extension AppDetailController: UICollectionViewDelegateFlowLayout {
             // return CGSize(width: view.frame.width, height: 600)
         } else {
             return CGSize(width: view.frame.width, height: 500)
-            
         }
     }
 }
