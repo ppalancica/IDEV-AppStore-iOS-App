@@ -47,12 +47,7 @@ final class AppDetailController: BaseListController {
             for: indexPath
         ) as! AppDetailCell
         
-        if let app {
-            cell.nameLabel.text = app.trackName
-            cell.releaseNotesLabel.text = app.releaseNotes
-            cell.appIconImageView.sd_setImage(with: URL(string: app.artworkUrl100))
-            cell.priceButton.setTitle(app.formattedPrice, for: .normal)
-        }
+        cell.app = app
         
         return cell
     }
@@ -67,13 +62,7 @@ extension AppDetailController: UICollectionViewDelegateFlowLayout {
         // Calculate the size the cell needs based on the content
         let dummyCell = AppDetailCell(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 1000))
         
-        if let app {
-            dummyCell.nameLabel.text = app.trackName
-            dummyCell.releaseNotesLabel.text = app.releaseNotes
-            dummyCell.appIconImageView.sd_setImage(with: URL(string: app.artworkUrl100))
-            dummyCell.priceButton.setTitle(app.formattedPrice, for: .normal)
-        }
-        
+        dummyCell.app = app
         dummyCell.layoutIfNeeded()
         
         let estimatedSize = dummyCell.systemLayoutSizeFitting(CGSize(width: view.frame.width, height: 1000))
