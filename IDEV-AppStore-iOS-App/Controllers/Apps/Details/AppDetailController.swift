@@ -11,9 +11,18 @@ final class AppDetailController: BaseListController {
             
             Service.shared.fetchGenericJSONData(urlString: urlString) { (result: SearchResult?, error) in
                 print(result?.results.first?.releaseNotes)
+                
+                let app = result?.results.first
+                self.app = app
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
             }
         }
     }
+    
+    var app: Result?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +47,13 @@ final class AppDetailController: BaseListController {
             for: indexPath
         ) as! AppDetailCell
         
+        if let app {
+            cell.nameLabel.text = app.trackName
+            cell.releaseNotesLabel.text = app.releaseNotes
+            cell.appIconImageView.sd_setImage(with: URL(string: app.artworkUrl100))
+            cell.priceButton.setTitle(app.formattedPrice, for: .normal)
+        }
+        
         return cell
     }
 }
@@ -48,6 +64,6 @@ extension AppDetailController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: 300)
+        return CGSize(width: view.frame.width, height: 600)
     }
 }

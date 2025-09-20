@@ -1,5 +1,14 @@
 import UIKit
 
+//
+// https://stackoverflow.com/questions/55705717/how-to-resize-collectionview-or-tableview-cell-from-custom-cell-class
+// https://stackoverflow.com/questions/55691684/expandable-uicollectionviewcell-works-only-after-scrolling
+//
+// When dealing with collection view cell animations, I've always relied on creating a custom implementation of UICollectionViewFlowLayout.  You'll need to create yourself a hook into this layout component to tell it how large your custom cell sizes are.
+//
+// let estimatedSize = dummyCell.systemLayoutSizeFitting(.init(width: view.frame.width, height: 1000))
+//
+
 final class AppDetailCell: UICollectionViewCell {
     
     let appIconImageView = UIImageView(cornerRadius: 16)
@@ -10,6 +19,8 @@ final class AppDetailCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        backgroundColor = .lightGray
         
         appIconImageView.backgroundColor = .red
         appIconImageView.constrainWidth(constant: 140)
